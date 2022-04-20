@@ -1,0 +1,26 @@
+<p>home-form works!</p>
+
+<mat-stepper linear #stepper>
+  <mat-step>
+    <ng-template matStepLabel>Selecciona ubicación de extracción</ng-template>
+    <p>Mapa...</p>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Datos Solicitante</ng-template>
+    <!-- Formulario Solicitante -->
+    <app-solicitante></app-solicitante>
+    <!-- Formulario Solicitante -->
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Caracteristicas del derecho</ng-template>
+    <!-- Formulario Solicitante -->
+    <p>Caracteristica derecho...</p>
+    <!-- Formulario Solicitante -->
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Adjuntos</ng-template>
+    <!-- Formulario Solicitante -->
+    <p>Adjuntos</p>
+    <!-- Formulario Solicitante -->
+  </mat-step>
+</mat-stepper>

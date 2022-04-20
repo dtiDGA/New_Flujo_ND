@@ -1,0 +1,154 @@
+<form class="mt-5" [formGroup]="requesterForm" (ngSubmit)="submit()">
+  <div class="container shadow rounded">
+    <mat-icon>person</mat-icon>
+    <div class="row mt-3">
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo Persona</mat-label>
+          <mat-select
+            formControlName="tipoPersona"
+            (selectionChange)="tipoPersonaChange($event)"
+          >
+            <mat-option value="natural">Natural</mat-option>
+            <mat-option value="juridica">Juridica</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Run/Rut</mat-label>
+          <input matInput formControlName="run" placeholder="12345678-9" />
+          <mat-error *ngIf="campoNoValido('run')"
+            >Debe ingresar un rut valido</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="outline" [hidden]="isJuridica">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" [hidden]="!isJuridica">
+          <mat-label>Razon Social</mat-label>
+          <input matInput formControlName="razonSocial" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="outline" [hidden]="isJuridica">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="apellidoPaterno" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" [hidden]="!isJuridica">
+          <mat-label>Código Único de Proyecto (CUP)</mat-label>
+          <input matInput formControlName="cup" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="outline" [hidden]="isJuridica">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="apellidoMaterno" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="outline" [hidden]="isJuridica">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="genero">
+            <mat-option value="F">Femenino</mat-option>
+            <mat-option value="M">Masculino</mat-option>
+            <mat-option value="N">Prefiero no decirlo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-icon>home</mat-icon>
+    <div formGroupName="domicilio">
+      <div class="row mt-3">
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Región</mat-label>
+            <mat-select formControlName="region">
+              <mat-option value="Metropolitana">Metropolitana</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Provincia</mat-label>
+            <mat-select formControlName="provincia">
+              <mat-option value="santiago">Santiago</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Comuna</mat-label>
+            <mat-select formControlName="comuna">
+              <mat-option value="cerrillos">Cerrillos</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Domicilio</mat-label>
+            <input
+              matInput
+              placeholder="españa 1463"
+              formControlName="domicilio"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Telefono contacto</mat-label>
+            <input
+              matInput
+              placeholder="+56987898734"
+              formControlName="telefono"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="correo@gmail.com"
+              formControlName="correo"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Confirmar email</mat-label>
+            <input
+              matInput
+              placeholder="correo@gmail.com"
+              formControlName="correoConfirmacion"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button
+        class="btn-lg text-uppercase mb-3"
+        mat-raised-button
+        [disabled]="requesterForm.invalid"
+        color="primary"
+        type="submit"
+      >
+        Agregar
+      </button>
+    </div>
+  </div>
+</form>
+
+<pre> {{ this.requesterForm.valid | json }}</pre>
