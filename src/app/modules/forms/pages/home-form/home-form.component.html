@@ -1,11 +1,11 @@
 <p>home-form works!</p>
 
-<mat-stepper linear #stepper>
+<mat-stepper linear>
   <mat-step>
     <ng-template matStepLabel>Selecciona ubicación de extracción</ng-template>
-    <p>Mapa...</p>
+    <app-mapa></app-mapa>
   </mat-step>
-  <mat-step>
+  <mat-step errorMessage="Debe rellenar todos los campos obligatorios">
     <ng-template matStepLabel>Datos Solicitante</ng-template>
     <!-- Formulario Solicitante -->
     <app-solicitante></app-solicitante>

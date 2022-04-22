@@ -17,10 +17,11 @@
       <div class="col-md-6 col-sm-12">
         <mat-form-field appearance="outline">
           <mat-label>Run/Rut</mat-label>
-          <input matInput formControlName="run" placeholder="12345678-9" />
-          <mat-error *ngIf="campoNoValido('run')"
-            >Debe ingresar un rut valido</mat-error
-          >
+          <input matInput formControlName="run" placeholder="XXXXXXXX-X" />
+          <mat-error *ngIf="campoNoValido('run')">
+            {{ RutErrorMsg }}
+          </mat-error>
+          <mat-hint>Sin puntos y con guion.</mat-hint>
         </mat-form-field>
       </div>
     </div>
@@ -65,21 +66,21 @@
       </div>
     </div>
     <mat-icon>home</mat-icon>
-    <div formGroupName="domicilio">
-      <div class="row mt-3">
+    <div  formGroupName="domicilio">
+      <div class="row mt-3" >
         <div class="col-md-4 col-sm-12">
-          <mat-form-field appearance="outline">
+          <mat-form-field  appearance="outline">
             <mat-label>Región</mat-label>
-            <mat-select formControlName="region">
-              <mat-option value="Metropolitana">Metropolitana</mat-option>
+            <mat-select formControlName="region" (valueChange)="regionChange( $event )">
+              <mat-option *ngFor="let region of nombresRegiones" [value]="region.number">{{ region.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="col-md-4 col-sm-12">
           <mat-form-field appearance="outline">
             <mat-label>Provincia</mat-label>
-            <mat-select formControlName="provincia">
-              <mat-option value="santiago">Santiago</mat-option>
+            <mat-select formControlName="provincia" (valueChange)="provinciaChange( $event )">
+              <mat-option *ngFor="let provincia of nombresProvincias" [value]="provincia">{{ provincia }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -87,7 +88,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Comuna</mat-label>
             <mat-select formControlName="comuna">
-              <mat-option value="cerrillos">Cerrillos</mat-option>
+              <mat-option *ngFor="let comuna of nombresComunas" [value]="comuna">{{ comuna }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -123,6 +124,7 @@
               placeholder="correo@gmail.com"
               formControlName="correo"
             />
+            <mat-error *ngIf="campoNoValido('domicilio.correo')">{{ EmailErrorMsg }}</mat-error>
           </mat-form-field>
         </div>
         <div class="col-md-4 col-sm-12">
@@ -133,6 +135,7 @@
               placeholder="correo@gmail.com"
               formControlName="correoConfirmacion"
             />
+            <mat-error *ngIf="campoNoValido('domicilio.correoConfirmacion')">Ambos correos deben ser iguales.</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -150,5 +153,3 @@
     </div>
   </div>
 </form>
-
-<pre> {{ this.requesterForm.valid | json }}</pre>
